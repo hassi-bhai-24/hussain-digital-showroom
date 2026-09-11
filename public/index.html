@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUSSAIN — Luxury Automotive Showroom</title>
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="HUSSAIN — Premium Automotive Showroom">
+    <meta property="og:description" content="Browse our verified luxury vehicle inventory with instant WhatsApp inquiry.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="brand-logo">
+                <div class="logo-box"><i class="fa-solid fa-car-side"></i></div>
+                <span class="brand-wordmark" id="brandHeaderTitle">HUSSAIN</span>
+            </a>
+
+            <nav class="desktop-nav">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#inventory" class="nav-link">Inventory</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <button class="btn-admin-trigger" onclick="openAdminModal()">
+                    <i class="fa-solid fa-lock"></i> Admin
+                </button>
+            </nav>
+
+            <button class="mobile-menu-toggle" aria-label="Open menu" onclick="toggleDrawer(true)">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <aside class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-header">
+            <span class="brand-wordmark" id="brandDrawerTitle">HUSSAIN</span>
+            <button class="drawer-close" aria-label="Close menu" onclick="toggleDrawer(false)">&times;</button>
+        </div>
+        <div class="drawer-links">
+            <a href="#home" onclick="toggleDrawer(false)">Home</a>
+            <a href="#inventory" onclick="toggleDrawer(false)">Inventory</a>
+            <a href="#about" onclick="toggleDrawer(false)">About</a>
+            <a href="#contact" onclick="toggleDrawer(false)">Contact</a>
+            <button class="btn-admin-trigger w-100" onclick="toggleDrawer(false); openAdminModal();">
+                <i class="fa-solid fa-lock"></i> Admin Portal
+            </button>
+        </div>
+    </aside>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="eyebrow-container">
+                        <span class="eyebrow-line"></span>
+                        <span class="eyebrow-text">CURATED • VERIFIED • YOURS</span>
+                    </div>
+                    <h1 class="hero-headline">Find Your <br><span class="accent-text">Dream Car.</span></h1>
+                    <p class="hero-description" id="heroDescription">Browse through our verified luxury inventory with instant WhatsApp inquiry.</p>
+                    <div class="hero-actions">
+                        <a href="#inventory" class="btn-primary">
+                            Explore Inventory <i class="fa-solid fa-arrow-down-long"></i>
+                        </a>
+                        <div class="trust-indicator">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>100% Verified Vehicles</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="hero-card-preview">
+                        <div class="hero-visual-badge"><i class="fa-solid fa-star"></i> Featured Collection</div>
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80" alt="Luxury Car" class="hero-img" id="heroFeaturedImg">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters Section -->
+        <section class="filter-section">
+            <div class="container">
+                <div class="search-bar-card">
+                    <div class="search-input-group">
+                        <label for="searchInput"><i class="fa-solid fa-magnifying-glass"></i> Search</label>
+                        <input type="text" id="searchInput" placeholder="Search make, model, or year..." oninput="applyFilters()">
+                    </div>
+
+                    <div class="search-input-group">
+                        <label for="statusFilter"><i class="fa-solid fa-filter"></i> Status</label>
+                        <select id="statusFilter" onchange="applyFilters()">
+                            <option value="all">All Vehicles</option>
+                            <option value="available">🟢 Available Only</option>
+                            <option value="pending">🟠 Sale in Progress</option>
+                            <option value="sold">🔴 Sold</option>
+                        </select>
+                    </div>
+
+                    <div class="search-input-group">
+                        <label for="maxPriceInput"><i class="fa-solid fa-tag"></i> Max Price (PKR)</label>
+                        <input type="number" id="maxPriceInput" placeholder="Any Price" oninput="applyFilters()">
+                    </div>
+
+                    <div class="checkbox-filter-group">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" id="installmentOnlyToggle" onchange="applyFilters()">
+                            <span class="checkmark"></span>
+                            <span class="checkbox-label">Installments Only</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Inventory Grid -->
+        <section id="inventory" class="inventory-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Our Collection</h2>
+                    <p class="section-subtitle">Verified vehicles inspected and ready for delivery.</p>
+                </div>
+                <div id="carGrid" class="car-grid">
+                    <!-- Dynamic Vehicle Cards -->
+                </div>
+            </div>
+        </section>
+
+        <!-- About & Contact Section -->
+        <section id="about" class="info-section">
+            <div class="container info-grid">
+                <div class="info-card">
+                    <i class="fa-solid fa-award info-icon"></i>
+                    <h3>Quality Guarantee</h3>
+                    <p>Every vehicle in our showroom undergoes rigorous multi-point mechanical inspection and title verification before listing.</p>
+                </div>
+
+                <div class="info-card" id="contact">
+                    <i class="fa-solid fa-location-dot info-icon"></i>
+                    <h3>Visit Our Showroom</h3>
+                    <p id="showroomAddress">Main Auto Boulevard, Luxury District</p>
+                    <div class="contact-buttons">
+                        <a id="footerWhatsappBtn" href="#" target="_blank" class="btn-whatsapp-outline">
+                            <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <p>&copy; 2026 <span id="footerBrand">HUSSAIN</span>. All rights reserved.</p>
+            <p class="footer-tagline">Simple • Secure • Premium Automotive Marketing</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Inquiry Modal -->
+    <div class="modal-backdrop" id="whatsappModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-brands fa-whatsapp text-lime"></i> Inquire via WhatsApp</h3>
+                <button class="btn-close" onclick="closeModal('whatsappModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="modalCarId">
+                <input type="hidden" id="modalPaymentType">
+
+                <div class="form-group">
+                    <label for="buyerNameInput">Your Name</label>
+                    <input type="text" id="buyerNameInput" placeholder="e.g. John Doe" oninput="updateWhatsAppPreview()">
+                </div>
+
+                <div class="form-group">
+                    <label for="buyerPhoneInput">Your Phone (Optional)</label>
+                    <input type="text" id="buyerPhoneInput" placeholder="e.g. +92 300 1234567" oninput="updateWhatsAppPreview()">
+                </div>
+
+                <div class="form-group">
+                    <label for="whatsappMessagePreview">Message Preview</label>
+                    <textarea id="whatsappMessagePreview" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal('whatsappModal')">Cancel</button>
+                <button class="btn-whatsapp" onclick="sendWhatsAppMessage()">
+                    Send on WhatsApp <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Portal Modal -->
+    <div class="modal-backdrop" id="adminModal">
+        <div class="modal-card modal-large">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-shield-halved text-lime"></i> Showroom Admin Portal</h3>
+                <button class="btn-close" onclick="closeModal('adminModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Login View -->
+                <div id="adminLoginView">
+                    <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+                        <div class="form-group">
+                            <label for="adminUser">Username</label>
+                            <input type="text" id="adminUser" required placeholder="admin">
+                        </div>
+                        <div class="form-group">
+                            <label for="adminPass">Password</label>
+                            <input type="password" id="adminPass" required placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="btn-primary w-100">Sign In to Dashboard</button>
+                    </form>
+                </div>
+
+                <!-- Dashboard View -->
+                <div id="adminDashboardView" class="hidden">
+                    <div class="admin-tabs">
+                        <button class="tab-btn active" data-tab="inventoryTab" onclick="switchAdminTab('inventoryTab')">Inventory</button>
+                        <button class="tab-btn" data-tab="addCarTab" onclick="startNewCarForm()">Add Vehicle</button>
+                        <button class="tab-btn" data-tab="configTab" onclick="switchAdminTab('configTab')">Settings</button>
+                        <button class="btn-logout" onclick="logoutAdmin()"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+                    </div>
+
+                    <!-- Inventory Tab -->
+                    <div id="inventoryTab" class="tab-content active">
+                        <div class="table-wrapper">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Vehicle</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminCarTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Add/Edit Vehicle Tab -->
+                    <div id="addCarTab" class="tab-content">
+                        <form id="carForm" onsubmit="handleCarFormSubmit(event)">
+                            <input type="hidden" id="carFormEditId">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Vehicle Name & Model</label>
+                                    <input type="text" id="formCarName" required placeholder="e.g. Toyota Fortuner Legender">
+                                </div>
+                                <div class="form-group">
+                                    <label>Year</label>
+                                    <input type="text" id="formCarYear" required placeholder="2024">
+                                </div>
+                                <div class="form-group">
+                                    <label>Mileage</label>
+                                    <input type="text" id="formCarMileage" required placeholder="8,500 km">
+                                </div>
+                                <div class="form-group">
+                                    <label>Cash Price (PKR)</label>
+                                    <input type="number" id="formCarPrice" required placeholder="18500000">
+                                </div>
+                                <div class="form-group span-2">
+                                    <label>Specifications</label>
+                                    <input type="text" id="formCarSpecs" required placeholder="2.8L Diesel | Automatic | 4x4">
+                                </div>
+                                <div class="form-group span-2">
+                                    <label>Status</label>
+                                    <select id="formCarStatus">
+                                        <option value="available">🟢 Available</option>
+                                        <option value="pending">🟠 Sale in Progress</option>
+                                        <option value="sold">🔴 Sold</option>
+                                    </select>
+                                </div>
+                                <div class="form-group span-2">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" id="formCarInstallmentCheck" onchange="toggleInstallmentInputs()">
+                                        <span class="checkmark"></span>
+                                        <span class="checkbox-label">Offer Installment Plan</span>
+                                    </label>
+                                </div>
+                                <div class="form-group span-2 hidden" id="installmentDetailsGroup">
+                                    <label>Installment Terms</label>
+                                    <input type="text" id="formCarInstallmentPlan" placeholder="e.g. Rs. 4,500,000 Down Payment | Rs. 350,000/mo">
+                                </div>
+                                <div class="form-group span-2">
+                                    <label>Upload Vehicle Photos (Max 5)</label>
+                                    <input type="file" id="formCarFiles" multiple accept="image/*">
+                                </div>
+                                <div class="form-group span-2">
+                                    <label>Or Image URLs (Comma Separated)</label>
+                                    <input type="text" id="formCarImageUrls" placeholder="https://image1.jpg, https://image2.jpg">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary w-100 mt-1" id="carFormSubmitBtn">Save Vehicle</button>
+                        </form>
+                    </div>
+
+                    <!-- Settings Tab -->
+                    <div id="configTab" class="tab-content">
+                        <form id="configForm" onsubmit="handleConfigSubmit(event)">
+                            <div class="form-group">
+                                <label>Showroom Name</label>
+                                <input type="text" id="configShowroomName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>WhatsApp Number (Country Code, digits only)</label>
+                                <input type="text" id="configWhatsapp" required placeholder="923000000000">
+                            </div>
+                            <div class="form-group">
+                                <label>Showroom Address</label>
+                                <input type="text" id="configAddress" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Showroom Description / Tagline</label>
+                                <textarea id="configDescription" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary w-100">Update Settings</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
