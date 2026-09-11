@@ -209,7 +209,8 @@ app.put('/api/admin/config', authenticateToken, (req, res) => {
 app.use((err, req, res, next) => {
     res.status(400).json({ error: err.message || 'Request processing failed.' });
 });
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    console.log(`HUSSAIN Showroom running at http://localhost:${PORT}`);
+  console.log(`HUSSAIN Showroom running on port ${PORT}`);
 });
