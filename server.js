@@ -1,3 +1,4 @@
+/* eslint-env node */
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -212,5 +213,5 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`HUSSAIN Showroom running on port ${PORT}`);
+  console.log(`HUSSAIN Showroom running at http://localhost:${PORT}`);
 });
